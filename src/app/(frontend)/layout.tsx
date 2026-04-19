@@ -10,8 +10,9 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="en">
+    <html lang="fa" data-theme="mousavi-light">
       <body>
+        <button className='btn'>bar umar lanat</button>
         <main>{children}</main>
       </body>
     </html>
