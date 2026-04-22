@@ -4,6 +4,7 @@ import { getPayload } from 'payload'
 
 import config from '@/payload.config'
 import Image from 'next/image'
+import SectionHeader from '../components/SectionHeader'
 
 const ResumePage = async () => {
   const payloadConfig = await config
@@ -15,9 +16,10 @@ const ResumePage = async () => {
   })
 
   return (
-    <div className="grow p-3">
-   
-      <div className="rounded-box border-accent border p-3">
+    <div className="grow p-3 w-full flex flex-col gap-3">
+      <SectionHeader section={resume as any} />
+
+      {/* <div className="rounded-box border-accent border p-3">
         <div className="avatar float-left mr-3 mb-2 w-24">
           <div className="w-24 h-24 rounded overflow-hidden relative">
             <Image
@@ -32,12 +34,12 @@ const ResumePage = async () => {
         <div className="leading-relaxed text-justify">{resume?.description}</div>
 
         <div className="clear-both" />
-      </div>
+      </div> */}
 
       <ul className="timeline timeline-snap-icon  timeline-vertical">
         {resume?.items?.map((item, idx) => (
           <li key={idx}>
-            <hr className='bg-accent' />
+            <hr className="bg-accent" />
             <div className="timeline-middle">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +61,7 @@ const ResumePage = async () => {
               <div className="text-lg font-black">{item?.title}</div>
               {item?.description}
             </div>
-            <hr className='bg-accent' />
+            <hr className="bg-accent" />
           </li>
         ))}
       </ul>

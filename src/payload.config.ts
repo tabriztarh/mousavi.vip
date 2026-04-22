@@ -138,9 +138,9 @@ export default buildConfig({
           type: 'text',
         },
         {
-          name:"image",
-          type:"upload",
-          relationTo:"media"
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
         },
         {
           name: 'description',
@@ -161,23 +161,23 @@ export default buildConfig({
             },
             {
               name: 'side',
-              type: "select",
-              options:[
+              type: 'select',
+              options: [
                 {
-                  value:"left",
-                  label:"Left"
+                  value: 'left',
+                  label: 'Left',
                 },
                 {
-                  value:"right",
-                  label:"Right"
-                }
-              ]
+                  value: 'right',
+                  label: 'Right',
+                },
+              ],
             },
             {
               name: 'date',
               type: 'text',
             },
-            
+
             {
               name: 'description',
               type: 'textarea',
@@ -187,6 +187,68 @@ export default buildConfig({
               type: 'upload',
               hasMany: true,
               relationTo: 'media',
+            },
+          ],
+        },
+      ],
+    },
+
+    {
+      slug: 'results',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+        },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+        },
+        {
+          name: 'meta',
+          type: 'json',
+          defaultValue: {},
+        },
+        {
+          name: 'items',
+          type: 'array',
+          fields: [
+            {
+              name: 'remark',
+              type: 'text',
+            },
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+            },
+
+            {
+              name: 'type',
+              type: 'select',
+              options: [
+                {
+                  value: 'gre',
+                  label: 'GRE',
+                },
+                {
+                  value: 'toefl',
+                  label: 'TOEFL',
+                },
+                {
+                  value: 'ielts',
+                  label: 'IELTS',
+                },
+              ],
+            },
+            {
+              name: 'score',
+              type: 'text',
             },
           ],
         },

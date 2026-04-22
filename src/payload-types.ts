@@ -94,10 +94,12 @@ export interface Config {
   globals: {
     options: Option;
     resume: Resume;
+    results: Result;
   };
   globalsSelect: {
     options: OptionsSelect<false> | OptionsSelect<true>;
     resume: ResumeSelect<false> | ResumeSelect<true>;
+    results: ResultsSelect<false> | ResultsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -465,6 +467,36 @@ export interface Resume {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "results".
+ */
+export interface Result {
+  id: number;
+  title?: string | null;
+  image?: (number | null) | Media;
+  description?: string | null;
+  meta?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  items?:
+    | {
+        remark?: string | null;
+        image?: (number | null) | Media;
+        type?: ('gre' | 'toefl' | 'ielts') | null;
+        score?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "options_select".
  */
 export interface OptionsSelect<T extends boolean = true> {
@@ -519,6 +551,28 @@ export interface ResumeSelect<T extends boolean = true> {
         date?: T;
         description?: T;
         images?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "results_select".
+ */
+export interface ResultsSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  description?: T;
+  meta?: T;
+  items?:
+    | T
+    | {
+        remark?: T;
+        image?: T;
+        type?: T;
+        score?: T;
         id?: T;
       };
   updatedAt?: T;
