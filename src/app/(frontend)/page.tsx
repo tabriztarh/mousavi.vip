@@ -6,6 +6,13 @@ import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
 import './styles.css'
+import { Media } from '@/payload-types'
+import Profile from './components/Profile'
+import Link from 'next/link'
+import MainMenu from './components/MainMenu'
+import SocialMediaBar from './components/SocialMediaBar'
+import CoursesMenu from './components/CoursesMenu'
+import Posts from './components/Posts'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -14,46 +21,32 @@ export default async function HomePage() {
   const { user } = await payload.auth({ headers })
 
   const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
+  const options = await payload.findGlobal({
+    slug: 'options',
+  })
 
+  const { docs: courses } = await payload.find({
+    collection: 'courses',
+    sort: 'id',
+  })
+
+  const { docs: posts } = await payload.find({
+    collection: 'posts',
+    limit: 9,
+    sort: 'createdAt',
+  })
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
-        </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
-    </div>
+    <main className="grow flex flex-col items-center p-3 gap-3">
+      <Profile options={options} />
+      <SocialMediaBar options={options} />
+      <div className="divider text-sm divider-accent">بخش ها</div>
+
+      <MainMenu options={options} />
+      <div className="divider text-sm divider-accent">دوره ها</div>
+      <CoursesMenu courses={courses} />
+
+      <div className="divider text-sm divider-accent">پست ها</div>
+      <Posts posts={posts} />
+    </main>
   )
 }
