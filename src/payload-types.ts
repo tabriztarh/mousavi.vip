@@ -439,6 +439,7 @@ export interface Option {
 export interface Resume {
   id: number;
   title?: string | null;
+  image?: (number | null) | Media;
   description?: string | null;
   meta?:
     | {
@@ -452,6 +453,7 @@ export interface Resume {
   items?:
     | {
         title?: string | null;
+        side?: ('left' | 'right') | null;
         date?: string | null;
         description?: string | null;
         images?: (number | Media)[] | null;
@@ -506,12 +508,14 @@ export interface OptionsSelect<T extends boolean = true> {
  */
 export interface ResumeSelect<T extends boolean = true> {
   title?: T;
+  image?: T;
   description?: T;
   meta?: T;
   items?:
     | T
     | {
         title?: T;
+        side?: T;
         date?: T;
         description?: T;
         images?: T;

@@ -138,8 +138,13 @@ export default buildConfig({
           type: 'text',
         },
         {
+          name:"image",
+          type:"upload",
+          relationTo:"media"
+        },
+        {
           name: 'description',
-          type: 'text',
+          type: 'textarea',
         },
         {
           name: 'meta',
@@ -155,9 +160,24 @@ export default buildConfig({
               type: 'text',
             },
             {
+              name: 'side',
+              type: "select",
+              options:[
+                {
+                  value:"left",
+                  label:"Left"
+                },
+                {
+                  value:"right",
+                  label:"Right"
+                }
+              ]
+            },
+            {
               name: 'date',
               type: 'text',
             },
+            
             {
               name: 'description',
               type: 'textarea',
