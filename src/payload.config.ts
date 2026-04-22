@@ -9,6 +9,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Courses } from './collections/Courses'
 import { Posts } from './collections/Posts'
+import { Messages } from './collections/Messages'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,7 +21,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Courses, Posts],
+  collections: [Users, Media, Courses, Posts, Messages],
   globals: [
     {
       slug: 'options',
@@ -252,6 +253,68 @@ export default buildConfig({
             },
           ],
         },
+      ],
+    },
+
+    {
+      slug: 'message',
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+        },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+        },
+        {
+          name: 'description',
+          type: 'textarea',
+        },
+        {
+          name: 'meta',
+          type: 'json',
+          defaultValue: {},
+        },
+        // {
+        //   name: 'items',
+        //   type: 'array',
+        //   fields: [
+        //     {
+        //       name: 'remark',
+        //       type: 'text',
+        //     },
+        //     {
+        //       name: 'image',
+        //       type: 'upload',
+        //       relationTo: 'media',
+        //     },
+
+        //     {
+        //       name: 'type',
+        //       type: 'select',
+        //       options: [
+        //         {
+        //           value: 'gre',
+        //           label: 'GRE',
+        //         },
+        //         {
+        //           value: 'toefl',
+        //           label: 'TOEFL',
+        //         },
+        //         {
+        //           value: 'ielts',
+        //           label: 'IELTS',
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       name: 'score',
+        //       type: 'text',
+        //     },
+        //   ],
+        // },
       ],
     },
   ],

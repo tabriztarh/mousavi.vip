@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     courses: Course;
     posts: Post;
+    messages: Message;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    messages: MessagesSelect<false> | MessagesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -95,11 +97,13 @@ export interface Config {
     options: Option;
     resume: Resume;
     results: Result;
+    message: Message1;
   };
   globalsSelect: {
     options: OptionsSelect<false> | OptionsSelect<true>;
     resume: ResumeSelect<false> | ResumeSelect<true>;
     results: ResultsSelect<false> | ResultsSelect<true>;
+    message: MessageSelect<false> | MessageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -203,6 +207,20 @@ export interface Post {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "messages".
+ */
+export interface Message {
+  id: number;
+  name: string;
+  number: string;
+  platform?: string | null;
+  reason?: string | null;
+  content?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -240,6 +258,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'messages';
+        value: number | Message;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -346,6 +368,19 @@ export interface PostsSelect<T extends boolean = true> {
   type?: T;
   caption?: T;
   isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "messages_select".
+ */
+export interface MessagesSelect<T extends boolean = true> {
+  name?: T;
+  number?: T;
+  platform?: T;
+  reason?: T;
+  content?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -497,6 +532,27 @@ export interface Result {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "message".
+ */
+export interface Message1 {
+  id: number;
+  title?: string | null;
+  image?: (number | null) | Media;
+  description?: string | null;
+  meta?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "options_select".
  */
 export interface OptionsSelect<T extends boolean = true> {
@@ -575,6 +631,19 @@ export interface ResultsSelect<T extends boolean = true> {
         score?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "message_select".
+ */
+export interface MessageSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  description?: T;
+  meta?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

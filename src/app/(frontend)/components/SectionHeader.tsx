@@ -1,10 +1,10 @@
-import { Media, Option, Resume, Result } from '@/payload-types'
+import { Media, Option, Resume, Result, Message1 } from '@/payload-types'
 import Image from 'next/image'
 
-const SectionHeader = ({ section }: { section?: Resume | Result }) => {
+const SectionHeader = ({ section }: { section?: Resume | Result | Message1 }) => {
   return (
     <div className="rounded-box border-accent border p-3 relative py-5">
-      <span className="badge badge-accent border-primary absolute -top-3.5 right-2 font-bold">
+      <span className="badge badge-accent border-primary absolute -top-3.5 right-2 font-bold w-32">
         {section?.title}
       </span>
 

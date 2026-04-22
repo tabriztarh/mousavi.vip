@@ -4,6 +4,7 @@ import localFont from 'next/font/local'
 
 import NextTopLoader from 'nextjs-toploader'
 import SpeedDial from './components/SpeedDial'
+import { Toaster } from 'react-hot-toast'
 
 import { getPayload } from 'payload'
 import config from '@/payload.config'
@@ -37,6 +38,14 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         {children}
         <FooterBar options={options} />
         <SpeedDial options={options} />
+        <Toaster
+          position="top-center"
+          containerClassName="text-xs font-bold"
+          containerStyle={{
+            ...vazirmatn.style,
+            direction: 'rtl',
+          }}
+        />{' '}
       </body>
     </html>
   )
