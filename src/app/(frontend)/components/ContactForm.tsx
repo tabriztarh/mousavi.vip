@@ -40,7 +40,7 @@ const ContactForm = () => {
         <select
           name="reason"
           value={message?.reason || ''}
-          defaultValue=""
+        //   defaultValue=""
           className="select w-full"
           onChange={(e) => setMessage({ ...message, [e.target.name]: e.target.value || '' })}
         >
@@ -62,7 +62,7 @@ const ContactForm = () => {
           value={message?.platform || ''}
           onChange={(e) => setMessage({ ...message, [e.target.name]: e.target.value || '' })}
           name="platfrom"
-          defaultValue=""
+        //   defaultValue=""
           className="select w-full"
         >
           <option disabled={true} value="">
