@@ -139,6 +139,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  isAdmin?: boolean | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -186,6 +187,21 @@ export interface Course {
   title?: string | null;
   slug?: string | null;
   icon?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   isActive?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -310,6 +326,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  isAdmin?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -353,6 +370,7 @@ export interface CoursesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   icon?: T;
+  content?: T;
   isActive?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -440,6 +458,7 @@ export interface Option {
     | {
         name?: string | null;
         title?: string | null;
+        twSize?: string | null;
         icon?: string | null;
         link?: string | null;
         useInSpeedDial?: boolean | null;
@@ -522,7 +541,7 @@ export interface Result {
     | {
         remark?: string | null;
         image?: (number | null) | Media;
-        type?: ('gre' | 'toefl' | 'ielts') | null;
+        type?: ('gre' | 'toefl' | 'ielts' | 'yds') | null;
         score?: string | null;
         id?: string | null;
       }[]
@@ -567,6 +586,7 @@ export interface OptionsSelect<T extends boolean = true> {
     | {
         name?: T;
         title?: T;
+        twSize?: T;
         icon?: T;
         link?: T;
         useInSpeedDial?: T;

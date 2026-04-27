@@ -7,7 +7,7 @@ const SpeedDial = ({ options }: { options: Option }) => {
   return (
     <div className="fab fab-flower">
       {/* a focusable div with tabIndex is necessary to work on all browsers. role="button" is necessary for accessibility */}
-      <div tabIndex={0} role="button" className="btn btn-circle btn-neutral btn-lg border border-primary">
+      <div tabIndex={0} role="button" className="btn btn-circle btn-neutral btn-lg border border-neutral">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -25,7 +25,7 @@ const SpeedDial = ({ options }: { options: Option }) => {
       </div>
 
       {/* Main Action button replaces the original button when FAB is open */}
-      <button className="fab-main-action btn btn-circle btn-lg btn-primary border-neutral">
+      <button className="fab-main-action btn btn-circle btn-lg btn-accent border-neutral">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -48,7 +48,7 @@ const SpeedDial = ({ options }: { options: Option }) => {
           href={contact?.link || '#'}
           target="_blank"
           key={idx}
-          className="btn btn-circle btn-lg tooltip tooltip-right border border-primary"
+          className="btn btn-circle btn-lg tooltip tooltip-right border border-neutral"
           data-tip={contact?.name}
         >
           <span className="size-6" dangerouslySetInnerHTML={{ __html: contact?.icon as string }} />

@@ -1,18 +1,23 @@
 import { Option } from '@/payload-types'
-import React from 'react'
+import Link from 'next/link'
 
 const SocialMediaBar = ({ options }: { options: Option }) => {
   return (
     <div className="flex items-center gap-1">
       {options?.socials?.map((social, idx) => (
-        <div key={idx} className="flex flex-col gap-1 group items-center">
-          <button key={idx} className="btn btn-square btn-primary btn-sm border border-netral/50">
-            <span className="size-5" dangerouslySetInnerHTML={{ __html: social?.icon as string }} />
+        <Link
+          href={social?.link || '#'}
+          target="_blank"
+          key={idx}
+          className="flex flex-col gap-1 group items-center"
+        >
+          <button key={idx} className="btn btn-square btn-accent btn-sm border border-primary">
+            <span className={social?.twSize || "size-5"} dangerouslySetInnerHTML={{ __html: social?.icon as string }} />
           </button>
-          <span className="badge badge-xs badge-primary badge-outline text-neutral border-primary w-15">
+          <span className="badge badge-xs badge-accent badge-outline text-neutral border-primary w-15">
             {social?.title || social?.name}
           </span>
-        </div>
+        </Link>
       ))}
     </div>
   )

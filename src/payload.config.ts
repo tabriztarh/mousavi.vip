@@ -80,6 +80,10 @@ export default buildConfig({
               name: 'title',
               type: 'text',
             },
+              {
+              name: 'twSize',
+              type: 'text',
+            },
             {
               name: 'icon',
               type: 'textarea',
@@ -244,6 +248,10 @@ export default buildConfig({
                 {
                   value: 'ielts',
                   label: 'IELTS',
+                },
+                {
+                  value: 'yds',
+                  label: 'YDS',
                 },
               ],
             },

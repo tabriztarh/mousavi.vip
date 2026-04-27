@@ -18,6 +18,10 @@ export const Courses: CollectionConfig = {
       type: 'textarea',
     },
     {
+      name: 'content',
+      type: 'richText',
+    },
+    {
       name: 'isActive',
       type: 'checkbox',
       defaultValue: false,

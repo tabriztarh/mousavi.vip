@@ -10,6 +10,7 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import FooterBar from './components/FooterBar'
 import AppBar from './components/AppBar'
+import Helper from './components/Helper'
 
 export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
@@ -32,7 +33,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <body
         className={`flex flex-col overflow-x-hidden min-h-screen mx-auto max-w-md bg-base-100 ${vazirmatn?.className}`}
       >
-        {' '}
+        <Helper />
         <NextTopLoader color="oklch(74% .12 230)" />
         <AppBar options={options} />
         {children}

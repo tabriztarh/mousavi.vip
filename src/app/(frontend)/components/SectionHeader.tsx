@@ -4,7 +4,7 @@ import Image from 'next/image'
 const SectionHeader = ({ section }: { section?: Resume | Result | Message1 }) => {
   return (
     <div className="rounded-box border-accent border p-3 relative py-5">
-      <span className="badge badge-accent border-primary absolute -top-3.5 right-2 font-bold w-32">
+      <span className="badge badge-accent border-primary absolute -top-3.5 right-2 font-bold w-42">
         {section?.title}
       </span>
 

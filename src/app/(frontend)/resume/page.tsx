@@ -17,7 +17,7 @@ const ResumePage = async () => {
         <ul className="timeline timeline-snap-icon  timeline-vertical">
           {resume?.items?.map((item, idx) => (
             <li key={idx}>
-              <hr className="bg-accent" />
+              <hr className="bg-accent w-0.5" />
               <div className="timeline-middle">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -40,7 +40,7 @@ const ResumePage = async () => {
                 <div className="text font-black">{item?.title}</div>
                 {item?.description}
               </div>
-              <hr className="bg-accent" />
+              <hr className="bg-accent w-0.5" />
             </li>
           ))}
         </ul>
