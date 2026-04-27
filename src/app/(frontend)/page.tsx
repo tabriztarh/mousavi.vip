@@ -33,7 +33,7 @@ export default async function HomePage() {
   const { docs: posts } = await payload.find({
     collection: 'posts',
     limit: 9,
-    sort: 'createdAt',
+    sort: '-createdAt',
   })
   return (
     <main className="grow flex flex-col items-center p-3 gap-3">
