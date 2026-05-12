@@ -1,6 +1,5 @@
-import { Option } from 'payload'
+export const dynamic = "force-dynamic";
 import { getPayload } from 'payload'
-
 import config from '@/payload.config'
 import { Media } from '@/payload-types'
 import Image from 'next/image'
@@ -9,9 +8,7 @@ import SectionHeader from '../components/SectionHeader'
 
 const Results = async () => {
   const payloadConfig = await config
-
   const payload = await getPayload({ config: payloadConfig })
-
   const results = await payload.findGlobal({
     slug: 'results',
   })

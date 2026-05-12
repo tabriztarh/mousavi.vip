@@ -13,8 +13,8 @@ import AppBar from './components/AppBar'
 import Helper from './components/Helper'
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: 'IELTS Instructor',
+  title: 'Mahdiyeh Mousavi',
 }
 
 const vazirmatn = localFont({

@@ -92,7 +92,7 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('fa' | 'en') | ('fa' | 'en')[];
   globals: {
     options: Option;
     resume: Resume;
@@ -105,7 +105,7 @@ export interface Config {
     results: ResultsSelect<false> | ResultsSelect<true>;
     message: MessageSelect<false> | MessageSelect<true>;
   };
-  locale: null;
+  locale: 'fa' | 'en';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -217,6 +217,27 @@ export interface Post {
   media?: (number | null) | Media;
   type?: ('video' | 'image') | null;
   caption?: string | null;
+  captions?:
+    | {
+        lang?: ('en' | 'fa') | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        id?: string | null;
+      }[]
+    | null;
   isActive?: boolean | null;
   updatedAt: string;
   createdAt: string;
@@ -385,6 +406,13 @@ export interface PostsSelect<T extends boolean = true> {
   media?: T;
   type?: T;
   caption?: T;
+  captions?:
+    | T
+    | {
+        lang?: T;
+        content?: T;
+        id?: T;
+      };
   isActive?: T;
   updatedAt?: T;
   createdAt?: T;

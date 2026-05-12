@@ -15,6 +15,21 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  localization: {
+    defaultLocale: 'en',
+    fallback: true,
+    locales: [
+      {
+        code: 'fa',
+        label: 'Farsi',
+        rtl: true,
+      },
+      {
+        code: 'en',
+        label: 'English',
+      },
+    ],
+  },
   admin: {
     user: Users.slug,
     importMap: {
@@ -80,7 +95,7 @@ export default buildConfig({
               name: 'title',
               type: 'text',
             },
-              {
+            {
               name: 'twSize',
               type: 'text',
             },

@@ -28,6 +28,31 @@ export const Posts: CollectionConfig = {
       type: 'textarea',
     },
     {
+      name: 'captions',
+      type: 'array',
+      fields: [
+        {
+          name: 'lang',
+          type: 'select',
+          options: [
+            {
+              label: 'english',
+              value: 'en',
+            },
+            {
+              label: 'farsi',
+              value: 'fa',
+            },
+          ],
+        },
+
+        {
+          name: 'content',
+          type: 'richText',
+        },
+      ],
+    },
+    {
       name: 'isActive',
       type: 'checkbox',
       defaultValue: false,

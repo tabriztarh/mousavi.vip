@@ -3,6 +3,9 @@ import config from '@/payload.config'
 import Image from 'next/image'
 import { Media } from '@/payload-types'
 import { notFound } from 'next/navigation'
+import { Fragment } from 'react'
+import { RichText } from '../../components/RichText'
+import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 
 const PostPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
@@ -43,10 +46,30 @@ const PostPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </video>
         </div>
       )}
-
-      {post?.caption && (
-        <div className="w-full rounded-box border border-accent p-3">{post.caption}</div>
+      {post?.captions && post?.captions?.length > 0 && (
+        <>
+          <div className="tabs tabs-box gap-x-2 p-0 bg-transparent">
+            {post?.captions?.map((caption,idx) => (
+              <Fragment key={idx}>
+                <label className="tab  w-12 btn  btn-accent btn-sm border border-primary">
+                  <input type="radio" name="caption" defaultChecked={idx === 0} />
+                  {caption?.lang}
+                </label>
+                <div
+                  className="tab-content w-full rounded-box border border-accent p-3"
+                  dir={caption?.lang === 'en' ? 'ltr' : 'rtl'}
+                >
+                  <RichText data={caption?.content as SerializedEditorState} />
+                  {/* {caption?.content} */}
+                </div>
+              </Fragment>
+            ))}
+          </div>
+        </>
       )}
+      {/* {post?.caption && (
+        <div className="w-full rounded-box border border-accent p-3">{post.caption}</div>
+      )} */}
     </div>
   )
 }
