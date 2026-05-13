@@ -7,7 +7,7 @@ const SpeedDial = ({ options }: { options: Option }) => {
   return (
     <div className="fab fab-flower">
       {/* a focusable div with tabIndex is necessary to work on all browsers. role="button" is necessary for accessibility */}
-      <div tabIndex={0} role="button" className="btn btn-circle btn-neutral btn-lg border border-neutral">
+      <div tabIndex={0} role="button" className="btn btn-circle btn-neutral btn-lg border border-accent">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
