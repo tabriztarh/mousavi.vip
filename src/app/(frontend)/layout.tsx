@@ -11,6 +11,7 @@ import config from '@/payload.config'
 import FooterBar from './components/FooterBar'
 import AppBar from './components/AppBar'
 import Helper from './components/Helper'
+import Script from 'next/script'
 
 export const metadata = {
   description: 'IELTS Instructor',
@@ -33,6 +34,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       <body
         className={`flex flex-col overflow-x-hidden min-h-screen mx-auto max-w-md bg-base-100 ${vazirmatn?.className}`}
       >
+        <Script
+          defer
+          src="https://umami.mousavi.vip/script.js"
+          data-website-id="7aede642-49fe-4761-b315-b44b114785d8"
+        />
         <Helper />
         <NextTopLoader color="oklch(74% .12 230)" />
         <AppBar options={options} />
