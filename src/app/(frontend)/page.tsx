@@ -32,6 +32,11 @@ export default async function HomePage() {
 
   const { docs: posts } = await payload.find({
     collection: 'posts',
+    where: {
+      isActive: {
+        equals: true,
+      },
+    },
     limit: 9,
     sort: '-createdAt',
   })
