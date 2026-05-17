@@ -6,6 +6,8 @@ import { notFound } from 'next/navigation'
 import { Fragment } from 'react'
 import { RichText } from '../../components/RichText'
 import { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import ShareBtn from '../../components/ShareBtn'
+import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext';
 
 const PostPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
@@ -21,6 +23,9 @@ const PostPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!post) return notFound()
 
   const media = post?.media as Media
+
+
+const captionText = convertLexicalToPlaintext({data:post?.captions?.[0]?.content as SerializedEditorState})
 
   return (
     <div className="grow flex flex-col w-full p-3 gap-3">
@@ -46,27 +51,28 @@ const PostPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </video>
         </div>
       )}
-      {post?.captions && post?.captions?.length > 0 && (
-        <>
-          <div className="tabs tabs-box gap-x-2 p-0 bg-transparent">
-            {post?.captions?.map((caption,idx) => (
-              <Fragment key={idx}>
-                <label className="tab  w-12 btn  btn-accent btn-sm border border-primary">
-                  <input type="radio" name="caption" defaultChecked={idx === 0} />
-                  {caption?.lang}
-                </label>
-                <div
-                  className="tab-content w-full rounded-box border border-accent p-3"
-                  dir={caption?.lang === 'en' ? 'ltr' : 'rtl'}
-                >
-                  <RichText data={caption?.content as SerializedEditorState} />
-                  {/* {caption?.content} */}
-                </div>
-              </Fragment>
-            ))}
-          </div>
-        </>
-      )}
+      <div className="tabs tabs-box gap-x-2 p-0 bg-transparent relative min-h-15">
+        <div className="gap-x-2 flex items-center justify-center absolute left-0">
+         <ShareBtn title={`${captionText?.split(" ")?.slice(0,15)?.join(" ")}...`} />
+        </div>
+        {post?.captions &&
+          post?.captions?.length > 0 &&
+          post?.captions?.map((caption, idx) => (
+            <Fragment key={idx}>
+              <label className="tab  w-12 btn  btn-accent btn-sm border border-primary">
+                <input type="radio" name="caption" defaultChecked={idx === 0} />
+                {caption?.lang}
+              </label>
+              <div
+                className="tab-content w-full rounded-box border border-accent p-3"
+                dir={caption?.lang === 'en' ? 'ltr' : 'rtl'}
+              >
+                <RichText data={caption?.content as SerializedEditorState} />
+                {/* {caption?.content} */}
+              </div>
+            </Fragment>
+          ))}
+      </div>
       {/* {post?.caption && (
         <div className="w-full rounded-box border border-accent p-3">{post.caption}</div>
       )} */}

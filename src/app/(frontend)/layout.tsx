@@ -12,6 +12,7 @@ import FooterBar from './components/FooterBar'
 import AppBar from './components/AppBar'
 import Helper from './components/Helper'
 import Script from 'next/script'
+import Loading from './components/Loading'
 
 export const metadata = {
   description: 'IELTS Instructor',
@@ -20,6 +21,8 @@ export const metadata = {
 
 const vazirmatn = localFont({
   src: './assets/font/font.woff2',
+  display: 'swap',
+  preload: true,
 })
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
@@ -27,7 +30,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   const payload = await getPayload({ config: payloadConfig })
   const options = await payload.findGlobal({
     slug: 'options',
-  }) //cache it
+  }) 
 
   return (
     <html lang="fa" data-theme="mousavi-light" dir="rtl">
@@ -36,9 +39,11 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
       >
         <Script
           defer
+          strategy="afterInteractive"
           src="https://umami.mousavi.vip/script.js"
           data-website-id="7aede642-49fe-4761-b315-b44b114785d8"
         />
+        {/* <Loading /> */}
         <Helper />
         <NextTopLoader color="oklch(74% .12 230)" />
         <AppBar options={options} />
@@ -52,7 +57,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
             ...vazirmatn.style,
             direction: 'rtl',
           }}
-        />{' '}
+        />
       </body>
     </html>
   )

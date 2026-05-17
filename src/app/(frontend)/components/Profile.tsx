@@ -27,6 +27,9 @@ const Profile = ({ options }: { options: Option }) => {
         <div className="ring-accent ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2 relative">
           <Image
             fill
+            priority
+            // loading='lazy'
+            sizes="96px"
             className="object-cover"
             src={(options?.avatar as Media)?.url as string}
             alt={(options?.avatar as Media)?.alt as string}

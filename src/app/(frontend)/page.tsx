@@ -1,26 +1,16 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
 import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
 
 import config from '@/payload.config'
 import './styles.css'
-import { Media } from '@/payload-types'
 import Profile from './components/Profile'
-import Link from 'next/link'
 import MainMenu from './components/MainMenu'
 import SocialMediaBar from './components/SocialMediaBar'
 import CoursesMenu from './components/CoursesMenu'
 import Posts from './components/Posts'
+import { cache } from 'react'
+export const getHomeData = cache(async () => {
+  const payload = await getPayload({ config: await config })
 
-export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
-
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
   const options = await payload.findGlobal({
     slug: 'options',
   })
@@ -32,14 +22,15 @@ export default async function HomePage() {
 
   const { docs: posts } = await payload.find({
     collection: 'posts',
-    where: {
-      isActive: {
-        equals: true,
-      },
-    },
+    where: { isActive: { equals: true } },
     limit: 9,
     sort: '-createdAt',
   })
+
+  return { options, courses, posts }
+})
+export default async function HomePage() {
+  const { options, courses, posts } = await getHomeData()
   return (
     <main className="grow flex flex-col items-center p-3 gap-3">
       <Profile options={options} />
